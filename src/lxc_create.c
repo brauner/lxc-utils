@@ -29,7 +29,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static uint64_t get_fssize(char *s)
 {

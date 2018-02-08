@@ -32,7 +32,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static int my_checker(const struct lxc_arguments* args)
 {
@@ -131,8 +131,8 @@ int main(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	} else {
-		char buffer[TOOL_MAXPATHLEN];
-		int ret = c->get_cgroup_item(c, state_object, buffer, TOOL_MAXPATHLEN);
+		char buffer[PATH_MAX];
+		int ret = c->get_cgroup_item(c, state_object, buffer, PATH_MAX);
 		if (ret < 0) {
 			fprintf(stderr, "failed to retrieve value of '%s' for '%s:%s'\n",
 			      state_object, my_args.lxcpath[0], my_args.name);

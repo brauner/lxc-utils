@@ -40,7 +40,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 #define USER_HZ   100
 #define ESC       "\033"

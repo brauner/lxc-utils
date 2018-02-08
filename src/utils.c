@@ -45,7 +45,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 int lxc_fill_elevated_privileges(char *flaglist, int *flags)
 {
@@ -601,11 +601,11 @@ bool file_exists(const char *f)
 
 bool switch_to_ns(pid_t pid, const char *ns) {
 	int fd, ret;
-	char nspath[TOOL_MAXPATHLEN];
+	char nspath[PATH_MAX];
 
 	/* Switch to new ns */
-	ret = snprintf(nspath, TOOL_MAXPATHLEN, "/proc/%d/ns/%s", pid, ns);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	ret = snprintf(nspath, PATH_MAX, "/proc/%d/ns/%s", pid, ns);
+	if (ret < 0 || ret >= PATH_MAX)
 		return false;
 
 	fd = open(nspath, O_RDONLY);

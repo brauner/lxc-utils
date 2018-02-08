@@ -30,7 +30,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static int my_parser(struct lxc_arguments *args, int c, char *arg);
 

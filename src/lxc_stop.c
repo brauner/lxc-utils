@@ -31,7 +31,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 #define OPT_NO_LOCK OPT_USAGE + 1
 #define OPT_NO_KILL OPT_USAGE + 2

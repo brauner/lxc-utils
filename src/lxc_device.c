@@ -30,7 +30,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 #if HAVE_IFADDRS_H
 #include <ifaddrs.h>

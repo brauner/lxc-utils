@@ -116,10 +116,10 @@ Options :\n\
 static bool set_argv(struct lxc_container *c, struct lxc_arguments *args)
 {
 	int ret;
-	char buf[TOOL_MAXPATHLEN];
+	char buf[PATH_MAX];
 	char **components, **p;
 
-	ret = c->get_config_item(c, "lxc.execute.cmd", buf, TOOL_MAXPATHLEN);
+	ret = c->get_config_item(c, "lxc.execute.cmd", buf, PATH_MAX);
 	if (ret < 0)
 		return false;
 
