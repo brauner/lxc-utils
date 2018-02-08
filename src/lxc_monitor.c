@@ -44,7 +44,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static bool quit_monitord;
 
@@ -416,7 +416,7 @@ static int lxc_monitord_spawn(const char *lxcpath)
 {
 	int ret;
 	int pipefd[2];
-	char pipefd_str[TOOL_NUMSTRLEN64];
+	char pipefd_str[NUMSTRLEN64];
 	pid_t pid1, pid2;
 
 	char *const args[] = {
@@ -481,8 +481,8 @@ static int lxc_monitord_spawn(const char *lxcpath)
 
 	close(pipefd[0]);
 
-	ret = snprintf(pipefd_str, TOOL_NUMSTRLEN64, "%d", pipefd[1]);
-	if (ret < 0 || ret >= TOOL_NUMSTRLEN64) {
+	ret = snprintf(pipefd_str, NUMSTRLEN64, "%d", pipefd[1]);
+	if (ret < 0 || ret >= NUMSTRLEN64) {
 		fprintf(stderr, "Failed to create pid argument to pass to monitord\n");
 		exit(EXIT_FAILURE);
 	}

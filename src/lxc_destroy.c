@@ -29,7 +29,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static int my_parser(struct lxc_arguments* args, int c, char* arg);
 static bool quiet;
@@ -154,11 +154,11 @@ static int my_parser(struct lxc_arguments *args, int c, char *arg)
 static bool do_destroy(struct lxc_container *c)
 {
 	bool bret = true;
-	char path[TOOL_MAXPATHLEN];
+	char path[PATH_MAX];
 
 	/* First check whether the container has dependent clones or snapshots. */
-	int ret = snprintf(path, TOOL_MAXPATHLEN, "%s/%s/lxc_snapshots", c->config_path, c->name);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	int ret = snprintf(path, PATH_MAX, "%s/%s/lxc_snapshots", c->config_path, c->name);
+	if (ret < 0 || ret >= PATH_MAX)
 		return false;
 
 	if (file_exists(path)) {
@@ -167,8 +167,8 @@ static bool do_destroy(struct lxc_container *c)
 		return false;
 	}
 
-	ret = snprintf(path, TOOL_MAXPATHLEN, "%s/%s/snaps", c->config_path, c->name);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	ret = snprintf(path, PATH_MAX, "%s/%s/snaps", c->config_path, c->name);
+	if (ret < 0 || ret >= PATH_MAX)
 		return false;
 
 	if (rmdir(path) < 0 && errno != ENOENT) {
@@ -210,7 +210,7 @@ static bool do_destroy_with_snapshots(struct lxc_container *c)
 	struct lxc_container *c1;
 	struct stat fbuf;
 	bool bret = false;
-	char path[TOOL_MAXPATHLEN];
+	char path[PATH_MAX];
 	char *buf = NULL;
 	char *lxcpath = NULL;
 	char *lxcname = NULL;
@@ -220,8 +220,8 @@ static bool do_destroy_with_snapshots(struct lxc_container *c)
 	int counter = 0;
 
 	/* Destroy clones. */
-	ret = snprintf(path, TOOL_MAXPATHLEN, "%s/%s/lxc_snapshots", c->config_path, c->name);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	ret = snprintf(path, PATH_MAX, "%s/%s/lxc_snapshots", c->config_path, c->name);
+	if (ret < 0 || ret >= PATH_MAX)
 		return false;
 
 	fd = open(path, O_RDONLY | O_CLOEXEC);
@@ -272,8 +272,8 @@ static bool do_destroy_with_snapshots(struct lxc_container *c)
 	}
 
 	/* Destroy snapshots located in the containers snap/ folder. */
-	ret = snprintf(path, TOOL_MAXPATHLEN, "%s/%s/snaps", c->config_path, c->name);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	ret = snprintf(path, PATH_MAX, "%s/%s/snaps", c->config_path, c->name);
+	if (ret < 0 || ret >= PATH_MAX)
 		return false;
 
 	if (rmdir(path) < 0 && errno != ENOENT)

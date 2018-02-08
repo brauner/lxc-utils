@@ -31,7 +31,7 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 static const struct option my_longopts[] = {
 	LXC_COMMON_OPTIONS

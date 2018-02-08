@@ -40,7 +40,7 @@
 #include <sys/wait.h>
 
 #include "arguments.h"
-#include "tool_utils.h"
+#include "utils.h"
 
 struct my_iflist
 {
@@ -64,7 +64,7 @@ static void usage(char *cmd)
 
 static bool lookup_user(const char *optarg, uid_t *uid)
 {
-	char name[TOOL_MAXPATHLEN];
+	char name[PATH_MAX];
 	struct passwd *pwent = NULL;
 
 	if (!optarg || (optarg[0] == '\0'))
@@ -146,12 +146,12 @@ static int do_start(void *arg)
 
 int write_id_mapping(pid_t pid, const char *buf, size_t buf_size)
 {
-	char path[TOOL_MAXPATHLEN];
+	char path[PATH_MAX];
 	int fd, ret;
 
 
-	ret = snprintf(path, TOOL_MAXPATHLEN, "/proc/%d/uid_map", pid);
-	if (ret < 0 || ret >= TOOL_MAXPATHLEN)
+	ret = snprintf(path, PATH_MAX, "/proc/%d/uid_map", pid);
+	if (ret < 0 || ret >= PATH_MAX)
 		return -E2BIG;
 
 	fd = open(path, O_WRONLY);

@@ -30,13 +30,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <sys/param.h>
 
 #include <lxc/lxccontainer.h>
 
-#include "tool_list.h"
+#include "list.h"
 
-#define TOOL_MAXPATHLEN 4096
-#define TOOL_NUMSTRLEN64 21
+#define NUMSTRLEN64 21
 
 #ifndef CLONE_PARENT_SETTID
 #define CLONE_PARENT_SETTID 0x00100000
