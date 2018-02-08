@@ -36,8 +36,8 @@
 #include <lxc/lxccontainer.h>
 
 #include "arguments.h"
-#include "tool_list.h"
-#include "tool_utils.h"
+#include "list.h"
+#include "utils.h"
 
 static struct lxc_list defines;
 

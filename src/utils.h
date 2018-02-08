@@ -33,7 +33,7 @@
 
 #include <lxc/lxccontainer.h>
 
-#include "tool_list.h"
+#include "list.h"
 
 #define TOOL_MAXPATHLEN 4096
 #define TOOL_NUMSTRLEN64 21
