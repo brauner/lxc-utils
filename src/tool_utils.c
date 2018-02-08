@@ -30,6 +30,7 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <linux/personality.h>
 #include <linux/sched.h>
 #include <sys/mount.h>
 #include <sys/prctl.h>
