@@ -93,6 +93,49 @@
 #  define CLONE_NEWNET            0x40000000
 #endif
 
+/* Define setns() if missing from the C library */
+#ifndef HAVE_SETNS
+static inline int setns(int fd, int nstype)
+{
+#ifdef __NR_setns
+	return syscall(__NR_setns, fd, nstype);
+#elif defined(__NR_set_ns)
+	return syscall(__NR_set_ns, fd, nstype);
+#else
+	errno = ENOSYS;
+	return -1;
+#endif
+}
+#endif
+
+/* Define sethostname() if missing from the C library */
+#ifndef HAVE_SETHOSTNAME
+static inline int sethostname(const char * name, size_t len)
+{
+#ifdef __NR_sethostname
+return syscall(__NR_sethostname, name, len);
+#else
+errno = ENOSYS;
+return -1;
+#endif
+}
+#endif
+
+/* Define unshare() if missing from the C library */
+#ifndef HAVE_UNSHARE
+static inline int unshare(int flags)
+{
+#ifdef __NR_unshare
+	return syscall(__NR_unshare, flags);
+#else
+	errno = ENOSYS;
+	return -1;
+#endif
+}
+#else
+extern int unshare(int);
+#endif
+
 enum {
 	LXC_NS_USER,
 	LXC_NS_MNT,
