@@ -31,7 +31,7 @@ This includes:
 
 ## Generic Commands
 
-These commands do not operate on multiple containers or system settings for
+These commands not operate on multiple containers or system settings for
 containers.
 
 - `lxc-autostart`
